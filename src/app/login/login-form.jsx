@@ -1,13 +1,14 @@
 // LoginForm.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../componants/button";
+import { useAuth } from "../../context/AuthContext";
 
 const Input = ({
   label,
@@ -41,6 +42,8 @@ const Input = ({
 
 const LoginForm = () => {
   const router = useRouter();
+  const { login } = useAuth();
+  const [loginError, setLoginError] = useState(null);
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -53,8 +56,63 @@ const LoginForm = () => {
         .required("Password is required"),
     }),
     onSubmit: (values) => {
-      toast.success("Login successful!");
-      router.push(`/dashboard?email=${encodeURIComponent(values.email)}`);
+      console.log("Attempting login with:", values.email);
+      
+      // For testing purposes, let's add some sample users
+      const sampleUsers = [
+        {
+          email: 'admin@example.com',
+          password: 'admin123',
+          name: 'Admin User',
+          role: 'admin'
+        },
+        {
+          email: 'supervisor@example.com',
+          password: 'super123',
+          name: 'Supervisor User',
+          role: 'supervisor'
+        },
+        {
+          email: 'agent@example.com',
+          password: 'agent123',
+          name: 'Agent User',
+          role: 'agent'
+        }
+      ];
+      
+      // Check if email/password match any of our sample users
+      const user = sampleUsers.find(
+        user => user.email === values.email && user.password === values.password
+      );
+      
+      if (user) {
+        // Use the login function from AuthContext
+        const loggedInUser = login(values.email, values.password);
+        
+        if (loggedInUser) {
+          toast.success("Login successful!");
+          console.log("Login successful, redirecting to dashboard");
+          router.push('/dashboard');
+        } else {
+          setLoginError("Login failed. Please check your credentials.");
+          toast.error("Login failed. Please check your credentials.");
+        }
+      } else {
+        // For demo purposes, allow any login
+        console.log("User not found in sample data, but allowing login for demo");
+        toast.success("Login successful (demo mode)!");
+        
+        // Store a demo user in localStorage
+        const demoUser = {
+          id: 'demo123',
+          name: 'Demo User',
+          email: values.email,
+          role: 'agent'
+        };
+        localStorage.setItem('currentUser', JSON.stringify(demoUser));
+        
+        router.push('/dashboard');
+      }
     },
   });
 
@@ -86,6 +144,21 @@ const LoginForm = () => {
             error={formik.errors.password}
             touched={formik.touched.password}
           />
+
+          {loginError && (
+            <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
+              {loginError}
+            </div>
+          )}
+
+          <div className="mb-2 text-sm text-gray-600">
+            <p>For demo purposes, you can use these credentials:</p>
+            <ul className="list-disc pl-5 mt-1">
+              <li>Admin: admin@example.com / admin123</li>
+              <li>Supervisor: supervisor@example.com / super123</li>
+              <li>Agent: agent@example.com / agent123</li>
+            </ul>
+          </div>
 
           <Button text="Sign In" type="submit" />
 
