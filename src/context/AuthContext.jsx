@@ -128,6 +128,10 @@ export const AuthProvider = ({ children }) => {
     console.log("Logging out");
     setCurrentUser(null);
     localStorage.removeItem('currentUser');
+    // Clear any other auth-related data that might be stored
+    sessionStorage.clear();
+    // Set loading to false to ensure the login page works correctly after logout
+    setLoading(false);
   };
 
   const register = (userData) => {

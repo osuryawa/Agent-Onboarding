@@ -108,7 +108,7 @@ const DashboardHome = () => {
   console.log("DashboardHome rendering, currentUser:", currentUser);
 
   return (
-    <DashboardLayout>
+    <>
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-gray-600">
@@ -213,7 +213,8 @@ const DashboardHome = () => {
           </div>
         )}
       </div>
-    </DashboardLayout>
+  </>
+
   );
 };
 

@@ -5,23 +5,23 @@ import Button from '../../componants/button';
 
 const Input = ({ label, name, value, onChange, error }) => (
   <div className="mb-6">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-300 mb-1 uppercase">{label}</label>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1 uppercase">{label}</label>
     <input
       type="text"
       id={name}
       name={name}
       value={value}
       onChange={onChange}
-      className={`p-3 w-full bg-gray-800 border ${error ? 'border-red-500' : 'border-gray-700'} rounded-md text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`}
+      className={`p-3 w-full bg-white border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`}
     />
-    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+    {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
   </div>
 );
 
 const FileInput = ({ label, name, onChange, error, file }) => (
   <div className="mb-6">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-300 mb-1 uppercase">{label}</label>
-    <div className={`relative border ${error ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 bg-gray-800 hover:bg-gray-750 transition-all`}>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1 uppercase">{label}</label>
+    <div className={`relative border ${error ? 'border-red-500' : 'border-gray-300'} rounded-md p-3 bg-white hover:bg-gray-50 transition-all`}>
       <input
         type="file"
         id={name}
@@ -30,12 +30,12 @@ const FileInput = ({ label, name, onChange, error, file }) => (
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
       />
       <div className="flex items-center justify-between">
-        <span className="text-gray-400">{file ? file.name : 'Choose file...'}</span>
-        <span className="bg-gray-700 py-1 px-3 border border-gray-600 rounded-md text-sm font-medium text-gray-300 shadow-sm">Browse</span>
+        <span className="text-gray-600">{file ? file.name : 'Choose file...'}</span>
+        <span className="bg-gray-100 py-1 px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 shadow-sm">Browse</span>
       </div>
     </div>
-    {file && <p className="text-gray-400 text-sm mt-1">Selected: {file.name}</p>}
-    {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
+    {file && <p className="text-gray-600 text-sm mt-1">Selected: {file.name}</p>}
+    {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
   </div>
 );
 
@@ -123,38 +123,38 @@ const RegistrationForm = () => {
   const stepLabels = ['Personal Info', 'Address', 'Identity Verification', 'Education'];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-3xl bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-800">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-lg">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-white">Agent Onboarding</h1>
-          <p className="text-gray-400 mt-2">Let's get you started, Agent!</p>
+          <h1 className="text-3xl font-bold text-gray-800">Agent Onboarding</h1>
+          <p className="text-gray-600 mt-2">Let's get you started, Agent!</p>
         </div>
 
         <div className="flex items-center justify-between mb-8">
           {stepLabels.map((label, index) => (
             <div key={index} className="flex-1 flex flex-col items-center relative">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold
-                ${step === index + 1 ? 'bg-blue-600 text-white' : step > index + 1 ? 'bg-green-500 text-white' : 'bg-gray-800 text-gray-400'} border border-gray-700`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold relative z-10
+                ${step === index + 1 ? 'bg-blue-600 text-white' : step > index + 1 ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'} border ${step === index + 1 ? 'border-blue-600' : 'border-gray-300'}`}>
                 {step > index + 1 ? '✓' : (
-                  <span className="flex items-center justify-center w-full h-full">
+                  <label className="flex items-center text-sm text-gray-700 mb-2">
                     {index === 0 && <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>}
                     {index === 1 && <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>}
                     {index === 2 && <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" /></svg>}
                     {index === 3 && <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>}
-                  </span>
+                  </label>
                 )}
               </div>
-              <p className="text-xs mt-2 text-center text-gray-400">{label}</p>
+              <p className="text-xs mt-2 text-center text-gray-600">{label}</p>
               {index !== stepLabels.length - 1 && (
-                <div className="absolute top-5 left-1/2 w-full h-0.5 bg-gray-800">
-                  <div className={`h-0.5 ${step > index + 1 ? 'bg-green-500' : 'bg-gray-800'}`} style={{ width: '100%' }}></div>
+                <div className="absolute top-5 left-1/2 w-full h-0.5 bg-gray-200 z-0" style={{ transform: 'translateX(50%)' }}>
+                  <div className={`h-0.5 ${step > index + 1 ? 'bg-blue-500' : step === index + 1 ? 'bg-blue-300' : 'bg-gray-200'}`} style={{ width: '100%' }}></div>
                 </div>
               )}
             </div>
@@ -163,16 +163,16 @@ const RegistrationForm = () => {
 
         {step === 1 && (
           <>
-            <div className="uppercase text-sm font-bold text-gray-400 mb-4">First Name</div>
+            <div className="uppercase text-sm font-bold text-gray-700 mb-4">First Name</div>
             <Input label="" name="firstName" value={formData.firstName} onChange={handleChange} error={errors.firstName} />
             
-            <div className="uppercase text-sm font-bold text-gray-400 mb-4">Surname</div>
+            <div className="uppercase text-sm font-bold text-gray-700 mb-4">Surname</div>
             <Input label="" name="surname" value={formData.surname} onChange={handleChange} error={errors.surname} />
             
-            <div className="uppercase text-sm font-bold text-gray-400 mb-4">Contact No</div>
+            <div className="uppercase text-sm font-bold text-gray-700 mb-4">Contact No</div>
             <Input label="" name="contactNo" value={formData.contactNo} onChange={handleChange} error={errors.contactNo} />
             
-            <div className="uppercase text-sm font-bold text-gray-400 mb-4">Email</div>
+            <div className="uppercase text-sm font-bold text-gray-700 mb-4">Email</div>
             <Input label="" name="email" value={formData.email} onChange={handleChange} error={errors.email} />
           </>
         )}
@@ -236,11 +236,11 @@ const RegistrationForm = () => {
 
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-gray-900 p-8 rounded-lg max-w-md w-full border border-gray-800">
-            <h3 className="text-xl font-semibold mb-4 text-white">✅ Submission Successful!</h3>
-            <p className="text-gray-300 mb-2">Thank you for completing your registration.</p>
-            <p className="text-gray-300 mb-2">Our team will verify the provided details, and once approved, your <strong>User ID and Password</strong> will be sent to your registered email address.</p>
-            <p className="text-gray-300 mb-4">Please allow up to <strong>2 working days</strong> for this process.</p>
+          <div className="bg-white p-8 rounded-lg max-w-md w-full shadow-lg">
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">✅ Submission Successful!</h3>
+            <p className="text-gray-600 mb-2">Thank you for completing your registration.</p>
+            <p className="text-gray-600 mb-2">Our team will verify the provided details, and once approved, your <strong>User ID and Password</strong> will be sent to your registered email address.</p>
+            <p className="text-gray-600 mb-4">Please allow up to <strong>2 working days</strong> for this process.</p>
             <div className="mt-6">
               <button 
                 onClick={() => router.push('/login')} 

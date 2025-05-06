@@ -11,6 +11,11 @@ const DashboardLayout = ({ children }) => {
   const router = useRouter();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
+  // Pass the sidebar collapsed state to the Sidebar component
+  const toggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
+
   useEffect(() => {
     // For debugging
     console.log("DashboardLayout mounted, currentUser:", currentUser, "loading:", loading);
@@ -49,12 +54,18 @@ const DashboardLayout = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Sidebar />
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
-      <main className="pt-16 pl-64">
-        <div className="p-6">{children}</div>
-      </main>
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+        <main 
+          className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-20' : 'ml-64'}`}
+        >
+          <div className="p-6 h-full overflow-auto">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };

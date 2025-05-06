@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Sidebar = ({ collapsed = false, toggleSidebar }) => {
   const pathname = usePathname();
   const { currentUser, logout } = useAuth();
 
@@ -93,7 +92,7 @@ const Sidebar = () => {
           <div className="font-bold text-xl">Agent Portal</div>
         )}
         <button
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={toggleSidebar}
           className={`p-1 rounded-full hover:bg-gray-700 ${
             collapsed ? 'mx-auto' : ''
           }`}

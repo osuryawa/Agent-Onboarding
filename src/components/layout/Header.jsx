@@ -6,7 +6,7 @@ import { useData } from '../../context/DataContext';
 import Link from 'next/link';
 
 const Header = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const { notifications } = useData();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -14,7 +14,7 @@ const Header = () => {
   const unreadNotifications = notifications ? notifications.filter(n => !n.read) : [];
 
   return (
-    <header className="bg-white shadow-sm h-16 fixed top-0 right-0 left-0 z-10 flex items-center px-4">
+    <header className="bg-white shadow-sm h-16 z-10 flex items-center px-4 sticky top-0">
       <div className="flex-1"></div>
       <div className="flex items-center space-x-4">
         {currentUser && (
@@ -114,7 +114,8 @@ const Header = () => {
                   <button
                     onClick={() => {
                       setShowProfileMenu(false);
-                      // logout function would be called here
+                      logout();
+                      window.location.href = '/login';
                     }}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
