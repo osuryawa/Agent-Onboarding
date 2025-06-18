@@ -9,17 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
+    "chart.js": "^4.4.1",
     "formik": "^2.4.6",
     "next": "15.3.0",
     "react": "^19.0.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^19.0.0",
+    "react-table": "^7.8.0",
     "react-toastify": "^11.0.5",
+    "uuid": "^9.0.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "22.14.1",
     "@types/react": "19.1.2",
+    "@types/uuid": "^9.0.7",
     "tailwindcss": "^4",
     "typescript": "5.8.3"
   }
