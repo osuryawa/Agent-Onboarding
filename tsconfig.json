@@ -21,14 +21,20 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/componants/button.jsx"  ],
+    "**/*.tsx",
+    "src/componants/button.jsx",
+    "src/context/*.jsx"
+  ],
   "exclude": [
     "node_modules"
   ]
